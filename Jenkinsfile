@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment { 
 		APP_PORT=9090
-		job_name=${env.JOB_NAME}
+		job_name="${env.JOB_NAME}"
 	}
     // Save the job name in a global variable
     stages {
@@ -34,8 +34,8 @@ pipeline {
 							try {
 								// Use the dir("TODO") { Commands } construct to return to the target folder
 								// Run the "contact.war" application from the "target" folder
-								dir("target") {
-									java -jar "contact.war"
+								dir("../${job_name}/target") {
+ 									sh "java -jar contact.war"
 								}
 							// Open the catch block
 							} catch (Throwable e) {
